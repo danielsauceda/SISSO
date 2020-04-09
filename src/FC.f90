@@ -2121,7 +2121,7 @@ do i=2,nselect
            do i_temp=j,n
              order(i_temp+1) = order(i_temp)
            end do
-           order(j+1:n+1)=order(j:n)
+           ! order(j+1:n+1)=order(j:n)
            order(j)=i
            n=n+1
            cycle
