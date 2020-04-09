@@ -2118,6 +2118,9 @@ do i=2,nselect
                                                              .and.(ftag_select(i)-ftag_select(order(j)))>1d-8) ) then
          ll=j
          if(j==l+ceiling(float(ll-l)/2.0)) then
+           do i_temp=j,n
+             order(i_temp+1) = order(i_temp)
+           end do
            order(j+1:n+1)=order(j:n)
            order(j)=i
            n=n+1
