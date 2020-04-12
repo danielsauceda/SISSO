@@ -1834,10 +1834,12 @@ subroutine dup_scheck(nf,ftag,fname,order,available)
 ! duplication check
 ! output order and available
 integer*8 i,j,l,ll,order(:),n,nf
+integer*8, allocatable::temp_order(:)
 real*8 ftag(:)
 character(len=*) fname(:)
 logical available(:)
 
+allocate(temp_order(size(order)))
 IF(nf==0) THEN
   n=0
 ELSE
@@ -1871,7 +1873,15 @@ ELSE
        else
           l=j
           if(j==l+ceiling(float(ll-l)/2.0)) then
-            if(n>j) order(j+2:n+1)=order(j+1:n)
+            ! if(n>j) order(j+2:n+1)=order(j+1:n)
+            if(n>j) then
+                do i_temp=j,n
+                   temp_order(i_temp+1) = order(i_temp+1)
+                end do
+                do i_temp=j,n
+                   temp_order(i_temp+1) = order(i_temp+1)
+                end do
+            end if
             order(j+1)=i
             n=n+1
             cycle
