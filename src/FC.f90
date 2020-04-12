@@ -2104,7 +2104,8 @@ end function
 
 subroutine sis_s
 ! delete redundant feature, reduce size to subs_sis
-integer*8 i,j,k,l,ll,order(nselect),n
+!integer*8 i,j,k,l,ll,order(nselect),n
+integer*8 i,j,k,l,ll,order(nselect),n,temp_order(nselect)
 real*8 tmpf(ubound(f_select,1),subs_sis),tmpftag(subs_sis),tmpscore(subs_sis,2)
 character(len=lname) tmpname(subs_sis)
 
@@ -2129,7 +2130,10 @@ do i=2,nselect
          ll=j
          if(j==l+ceiling(float(ll-l)/2.0)) then
            do i_temp=j,n
-             order(i_temp+1) = order(i_temp)
+             temp_order(i_temp) = temp_order(i_temp)
+           end do
+           do i_temp=j,n
+             order(i_temp+1) = temp_order(i_temp)
            end do
            ! order(j+1:n+1)=order(j:n)
            order(j)=i
