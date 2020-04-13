@@ -2149,7 +2149,15 @@ do i=2,nselect
     else
           l=j
           if(j==l+ceiling(float(ll-l)/2.0)) then
-            if(n>j) order(j+2:n+1)=order(j+1:n)
+            !if(n>j) order(j+2:n+1)=order(j+1:n)
+            if(n>j) then
+               do i_temp=j,n
+                 temp_order(i_temp+1) = order(i_temp+1)
+               end do
+               do i_temp=j,n
+                  order(i_temp+2) = temp_order(i_temp+1)
+               end do
+            end if
             order(j+1)=i
             n=n+1
             cycle
