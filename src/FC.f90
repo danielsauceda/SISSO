@@ -1865,7 +1865,13 @@ ELSE
       if(ftag(i)>ftag(order(j))) then
          ll=j
          if(j==l+ceiling(float(ll-l)/2.0)) then
-           order(j+1:n+1)=order(j:n)
+            ! order(j+1:n+1)=order(j:n)
+            do i_temp=j,n                                                                                                                                                                                      
+               temp_order(i_temp) = order(i_temp)                                                                                                                                                              
+            end do
+            do i_temp=j,n
+              order(i_temp+1) = temp_order(i_temp)
+           end do
            order(j)=i
            n=n+1
            cycle
@@ -1879,7 +1885,7 @@ ELSE
                    temp_order(i_temp+1) = order(i_temp+1)
                 end do
                 do i_temp=j,n
-                   temp_order(i_temp+1) = order(i_temp+1)
+                   order(i_temp+2) = temp_order(i_temp+1)
                 end do
             end if
             order(j+1)=i
